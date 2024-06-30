@@ -2,6 +2,7 @@ package com.carbooking.driver.controllers;
 
 
 import com.carbooking.driver.models.APIResponse;
+import com.carbooking.driver.models.AttachementEntity;
 import com.carbooking.driver.models.Car;
 import com.carbooking.driver.models.CarWrapper;
 import com.carbooking.driver.services.CarService;
@@ -30,5 +31,10 @@ public class CarController {
     @GetMapping("/getCars")
     public ResponseEntity<List<Car>>  getAllCars(){
         return carService.getAllCars();
+    }
+
+    @GetMapping("getAllCars")
+    public ResponseEntity<List<AttachementEntity>> getCarDriverAttachmentDetails(@RequestParam Boolean attached){
+        return carService.getCarDriverAttachmentDetails(attached);
     }
 }

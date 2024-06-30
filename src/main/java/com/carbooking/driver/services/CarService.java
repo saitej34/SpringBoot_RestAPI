@@ -2,10 +2,7 @@ package com.carbooking.driver.services;
 
 import com.carbooking.driver.Dao.CarDao;
 import com.carbooking.driver.Dao.ManfacturerDao;
-import com.carbooking.driver.models.APIResponse;
-import com.carbooking.driver.models.Car;
-import com.carbooking.driver.models.CarWrapper;
-import com.carbooking.driver.models.Manfacturer;
+import com.carbooking.driver.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +54,21 @@ public class CarService {
         catch(Exception e){
             e.printStackTrace();
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<List<AttachementEntity>> getCarDriverAttachmentDetails(Boolean attached) {
+        try{
+            if(attached) {
+                List<AttachementEntity> result = carDao.findCarDriverAttachementDetails();
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            } else{
+                List<AttachementEntity> result = carDao.findCarDriverAttachementDetailsinFalse();
+                return new ResponseEntity<>(result,HttpStatus.OK);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
